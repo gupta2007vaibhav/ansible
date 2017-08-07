@@ -1,0 +1,8 @@
+# The name of the nginx package to install.
+nginx_package_name: "nginx"
+nginx_conf_template: "nginx.conf.j2"
+nginx_mime_template: "mime.types"
+nginx_yum_repo_enabled: true
+nginx_client_max_body_size: "60m"
+keep_logs: 10
+nginx_log_template: "nginx.logrotate.j2"

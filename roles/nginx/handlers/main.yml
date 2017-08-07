@@ -1,0 +1,9 @@
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: validate nginx config
+  command: nginx -t -c /etc/nginx/nginx.conf
+  changed_when: False
+
+- name: reload nginx
+  service: name=nginx state=reloaded

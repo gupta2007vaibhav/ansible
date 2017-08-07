@@ -1,0 +1,50 @@
+- include: install.yml
+
+- name: copy nginx file
+  template:
+    src: "{{ nginx_conf_template }}"
+    dest: "{{ nginx_conf_file_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload nginx
+
+- name: Ensure nginx is started and enabled to start at boot.
+  service: name=nginx state=started enabled=yes
+
+- name: copy nginx mime file
+  template:
+    src: "{{ nginx_mime_template }}"
+    dest: "{{ nginx_mime_file_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload nginx
+
+- name: logs dirs
+  file:
+    path: "/var/log/nginx"
+    owner: nginx
+    group: nginx
+    mode: 0755
+    recurse: yes
+    state: directory
+
+- name: cache dirs
+  file:
+    path: "/var/cache/cache"
+    owner: nginx
+    group: nginx
+    mode: 0755
+    recurse: yes
+    state: directory
+
+- name: logrotate
+  template:
+    src: "{{ nginx_log_template }}"
+    dest: "{{ nginx_log_file_path }}"
+    owner: root
+    group: root
+    mode: 0644
