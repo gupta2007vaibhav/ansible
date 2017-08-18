@@ -1,0 +1,3 @@
+- include: install.yml
+- include: server.yml
+- include: overcommit.yml

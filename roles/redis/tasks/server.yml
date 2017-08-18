@@ -1,0 +1,17 @@
+- name: create redis config file
+  template:
+    src: redis.conf
+    dest: /etc/redis.conf
+  notify: restart redis
+
+- name: create redis default config file
+  template:
+    src: redis-default.conf.j2
+    dest: /etc/redis-default.conf
+  notify: restart redis
+
+- name: ensure redis is running
+  service:
+    name: redis
+    state: started
+    enabled: yes

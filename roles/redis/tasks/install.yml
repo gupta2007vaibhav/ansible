@@ -1,0 +1,5 @@
+- name: install
+  yum:
+    name: "redis"
+    state: present
+  when: ansible_os_family == "RedHat"
