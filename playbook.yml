@@ -1,4 +1,15 @@
-- hosts: node1
-  become: true
+- hosts: 10.1.7.221
+  roles:
+    - redis
+
+- hosts: 10.1.6.90
   roles: 
-  - nginx
+   - redis
+  vars:
+   slave: true
+   master_ip: 10.1.7.221
+   master_port: 6379
+
+- hosts: 10.1.7.221
+  roles:
+    - nginx
